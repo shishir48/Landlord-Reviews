@@ -3,6 +3,7 @@ const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const propertyRoutes = require('./routes/properties');
 const landlordRoutes = require('./routes/landlords');
+const reviewRoutes = require('./routes/reviews');
 
 const app = express();
 app.use(cors());
@@ -12,5 +13,6 @@ app.get('/health', (_req, res) => res.json({ ok: true }));
 app.use('/auth', authRoutes);
 app.use('/properties', propertyRoutes);
 app.use('/landlords', landlordRoutes);
+app.use('/reviews', reviewRoutes);
 
 module.exports = app;

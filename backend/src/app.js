@@ -4,6 +4,7 @@ const authRoutes = require('./routes/auth');
 const propertyRoutes = require('./routes/properties');
 const landlordRoutes = require('./routes/landlords');
 const reviewRoutes = require('./routes/reviews');
+const adminRoutes = require('./routes/admin');
 
 const app = express();
 app.use(cors());
@@ -14,5 +15,6 @@ app.use('/auth', authRoutes);
 app.use('/properties', propertyRoutes);
 app.use('/landlords', landlordRoutes);
 app.use('/reviews', reviewRoutes);
+app.use('/admin', adminRoutes);
 
 module.exports = app;

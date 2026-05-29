@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'react-native';
 import { useEffect, useState } from 'react';
 import { router } from 'expo-router';
-import { useGoogleAuth, signInWithGoogleResponse, auth } from '../lib/auth';
+import { useGoogleAuth, signInWithGoogleResponse } from '../lib/auth';
 import { Colors } from '../constants/Colors';
 import { api } from '../lib/api';
 

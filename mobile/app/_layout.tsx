@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Slot, router, useSegments } from 'expo-router';
 import { onAuthChange } from '../lib/auth';
+import type { User } from 'firebase/auth';
 
 export default function RootLayout() {
-  const [user, setUser] = useState<any>(undefined);
+  const [user, setUser] = useState<User | null | undefined>(undefined);
   const segments = useSegments();
 
   useEffect(() => {

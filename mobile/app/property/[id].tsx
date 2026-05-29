@@ -1,5 +1,5 @@
 import {
-  View, Text, FlatList, TouchableOpacity,
+  View, Text, TouchableOpacity,
   StyleSheet, ActivityIndicator, ScrollView
 } from 'react-native';
 import { useLocalSearchParams, router } from 'expo-router';
@@ -58,7 +58,7 @@ export default function PropertyDetail() {
           {property.landlord_id ? `Landlord: ${property.landlord_id.name}` : 'Landlord unknown'}
         </Text>
         <View style={styles.ratingRow}>
-          <Text style={styles.bigNum}>{property.avg_rating.toFixed(1)}</Text>
+          <Text style={styles.bigNum}>{(property.avg_rating ?? 0).toFixed(1)}</Text>
           <View>
             <StarRating value={property.avg_rating} size={18} />
             <Text style={styles.reviewCount}>{property.review_count} reviews</Text>

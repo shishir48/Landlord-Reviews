@@ -1,6 +1,6 @@
 import {
   View, Text, TextInput, FlatList, TouchableOpacity,
-  StyleSheet, ActivityIndicator, RefreshControl
+  StyleSheet, RefreshControl
 } from 'react-native';
 import { useState, useCallback } from 'react';
 import { router } from 'expo-router';
@@ -19,7 +19,6 @@ type Property = {
 export default function HomeScreen() {
   const [query, setQuery] = useState('');
   const [properties, setProperties] = useState<Property[]>([]);
-  const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
   const loadFeed = useCallback(async () => {
@@ -43,21 +42,6 @@ export default function HomeScreen() {
     }
   };
 
-  const selectPlace = async (place_id: string, description: string) => {
-    setQuery(description);
-    setLoading(true);
-    try {
-      const res = await api.get(`/properties?place_id=${place_id}`);
-      router.push(`/property/${res.data.property._id}`);
-    } catch (err: any) {
-      if (err?.response?.status === 404) {
-        router.push({ pathname: '/review/add', params: { place_id, address: description } });
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -71,7 +55,6 @@ export default function HomeScreen() {
         />
       </View>
 
-      {loading && <ActivityIndicator style={{ margin: 16 }} color={Colors.primary} />}
 
       <FlatList
         data={properties}

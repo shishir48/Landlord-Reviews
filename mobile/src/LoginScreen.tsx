@@ -2,7 +2,6 @@ import { View, Text, TouchableOpacity, StyleSheet, ActivityIndicator } from 'rea
 import { useState } from 'react';
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 import { Colors } from '../constants/Colors';
-import { Config } from '../constants/Config';
 import { signInWithGoogleIdToken } from '../lib/auth';
 import { api } from '../lib/api';
 
@@ -13,11 +12,6 @@ type Props = {
 export function LoginScreen({ onLogin }: Props) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-
-  // Configure Google Sign-In once
-  GoogleSignin.configure({
-    webClientId: Config.GOOGLE_WEB_CLIENT_ID,
-  });
 
   const handleGoogleSignIn = async () => {
     setLoading(true);

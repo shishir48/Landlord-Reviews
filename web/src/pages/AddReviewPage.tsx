@@ -37,7 +37,11 @@ export function AddReviewPage() {
       }
 
       if (landlordName && !landlordId) {
-        await api.post('/landlords', { name: landlordName });
+        const lRes = await api.post('/landlords', { name: landlordName });
+        const lid = lRes.data.landlord._id;
+        await api.patch(`/properties/${pid}`, { landlord_id: lid });
+      } else if (landlordId) {
+        await api.patch(`/properties/${pid}`, { landlord_id: landlordId });
       }
 
       const tenancy_period =

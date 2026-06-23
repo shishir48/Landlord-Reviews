@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { StatusBar } from 'react-native';
+import { AppState, StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { AppNavigator } from './src/navigation/AppNavigator';
 import { onAuthChange } from './lib/auth';
 import { syncOfflineReviews } from './lib/offline';
-import { AppState } from 'react-native';
+import { Config } from './constants/Config';
+
+// Configure Google Sign-In once at app startup
+GoogleSignin.configure({
+  webClientId: Config.GOOGLE_WEB_CLIENT_ID,
+});
 
 function App(): React.JSX.Element {
   const [user, setUser] = useState<any>(undefined);

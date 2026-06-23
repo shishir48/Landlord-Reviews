@@ -58,9 +58,13 @@ export function AddReviewScreen() {
       }
 
       // 2. Attach landlord if provided
-      if (landlordName && !landlordId) {
+      let lid = landlordId;
+      if (landlordName && !lid) {
         const lRes = await api.post('/landlords', { name: landlordName });
-        void lRes; // Backend doesn't have property→landlord link endpoint yet
+        lid = lRes.data.landlord._id;
+      }
+      if (lid) {
+        await api.patch(`/properties/${pid}`, { landlord_id: lid });
       }
 
       // 3. Submit review

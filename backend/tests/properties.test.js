@@ -105,7 +105,7 @@ describe('PATCH /properties/:id', () => {
     const createRes = await request(app).post('/properties').set(AUTH)
       .send({ place_id: 'place-link', formatted_address: '42 Maple St', lat: 30.2, lng: -97.7 });
     const propertyId = createRes.body.property._id;
-    const { default: Landlord } = require('../src/models/Landlord');
+    const Landlord = require('../src/models/Landlord');
     const landlord = await Landlord.create({ name: 'John D', aliases: ['john d'] });
 
     const res = await request(app).patch(`/properties/${propertyId}`).set(AUTH)

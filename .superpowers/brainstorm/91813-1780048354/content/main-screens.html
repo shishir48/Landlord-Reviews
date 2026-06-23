@@ -1,0 +1,101 @@
+<h2>Core App Screens</h2>
+<p class="subtitle">Three primary flows — select the layout that feels right</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="home" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">🏠 Home / Search</div>
+        <div class="mockup-body" style="padding:12px;font-size:13px;">
+          <div class="mock-nav" style="font-size:12px;margin-bottom:8px;">Landlord Reviews &nbsp;&nbsp; 👤 Profile</div>
+          <input class="mock-input" placeholder="🔍 Search address or area..." style="width:100%;box-sizing:border-box;margin-bottom:10px;">
+          <div style="font-size:11px;color:#888;margin-bottom:6px;">RECENT REVIEWS NEAR YOU</div>
+          <div style="background:#f5f5f5;border-radius:6px;padding:8px;margin-bottom:6px;">
+            <div style="font-weight:600;font-size:12px;">42 Maple St, Austin TX</div>
+            <div style="color:#f59e0b;font-size:12px;">★★★★☆ &nbsp;<span style="color:#888">14 reviews</span></div>
+            <div style="font-size:11px;color:#666">Landlord: John D.</div>
+          </div>
+          <div style="background:#f5f5f5;border-radius:6px;padding:8px;margin-bottom:6px;">
+            <div style="font-weight:600;font-size:12px;">890 Oak Ave, Austin TX</div>
+            <div style="color:#f59e0b;font-size:12px;">★★★☆☆ &nbsp;<span style="color:#888">6 reviews</span></div>
+            <div style="font-size:11px;color:#666">Landlord: Unknown</div>
+          </div>
+          <button class="mock-button" style="width:100%;margin-top:8px;background:#2563eb;color:white;border:none;">+ Add a Property</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Home Screen</h3>
+      <p>Search bar + recent/nearby properties. Add Property CTA prominent at bottom.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="property" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">🏡 Property Detail</div>
+        <div class="mockup-body" style="padding:12px;font-size:13px;">
+          <div style="font-weight:700;font-size:14px;margin-bottom:2px;">42 Maple St, Austin TX 78701</div>
+          <div style="font-size:11px;color:#666;margin-bottom:8px;">Landlord: <span style="color:#2563eb">John Davidson</span></div>
+          <div style="display:flex;gap:12px;margin-bottom:10px;">
+            <div style="text-align:center;">
+              <div style="font-size:28px;font-weight:700;color:#2563eb;">4.2</div>
+              <div style="color:#f59e0b;font-size:14px;">★★★★☆</div>
+              <div style="font-size:10px;color:#888">14 reviews</div>
+            </div>
+            <div style="flex:1;font-size:11px;">
+              <div>Responsiveness ★★★★☆</div>
+              <div>Cleanliness ★★★★★</div>
+              <div>Value ★★★☆☆</div>
+            </div>
+          </div>
+          <button class="mock-button" style="width:100%;background:#16a34a;color:white;border:none;margin-bottom:8px;">✍ Write a Review</button>
+          <div style="border-top:1px solid #eee;padding-top:8px;font-size:11px;">
+            <div style="margin-bottom:6px;"><strong>Anon User</strong> · ★★★★☆ · Jun 2024<br>"Great landlord, fixed issues quickly."</div>
+            <div><strong>Anon User</strong> · ★★★☆☆ · Jan 2024<br>"Decent but slow on repairs."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Property Detail</h3>
+      <p>Rating summary, sub-ratings, review list. Write Review CTA prominent.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="addreview" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div class="mockup">
+        <div class="mockup-header">✍ Write Review / Add Property</div>
+        <div class="mockup-body" style="padding:12px;font-size:13px;">
+          <div style="font-size:11px;color:#888;margin-bottom:4px;">PROPERTY</div>
+          <input class="mock-input" placeholder="Start typing address..." style="width:100%;box-sizing:border-box;margin-bottom:8px;">
+          <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;padding:6px;font-size:11px;margin-bottom:8px;">
+            📍 42 Maple St, Austin TX 78701
+          </div>
+          <div style="font-size:11px;color:#888;margin-bottom:4px;">LANDLORD NAME (optional)</div>
+          <input class="mock-input" placeholder="e.g. John Davidson" style="width:100%;box-sizing:border-box;margin-bottom:4px;">
+          <div style="background:#fefce8;border:1px solid #fde047;border-radius:4px;padding:5px;font-size:10px;margin-bottom:8px;">
+            💡 Did you mean: <strong>John Davidson</strong> (12 properties)?
+          </div>
+          <div style="font-size:11px;color:#888;margin-bottom:4px;">OVERALL RATING</div>
+          <div style="font-size:24px;margin-bottom:8px;">★★★★☆</div>
+          <textarea class="mock-input" placeholder="Describe your experience..." style="width:100%;box-sizing:border-box;height:60px;resize:none;"></textarea>
+          <div style="display:flex;gap:4px;margin-top:8px;">
+            <input class="mock-input" placeholder="Lived: From" style="flex:1;">
+            <input class="mock-input" placeholder="To" style="flex:1;">
+          </div>
+          <button class="mock-button" style="width:100%;margin-top:8px;background:#2563eb;color:white;border:none;">Submit Review</button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Add Review / Property</h3>
+      <p>Google Places autocomplete → landlord fuzzy suggest → star rating → text → tenancy dates.</p>
+    </div>
+  </div>
+
+</div>
+
+<p class="subtitle" style="margin-top:16px;">Click any card to select. These are the 3 main screens — does this flow make sense?</p>

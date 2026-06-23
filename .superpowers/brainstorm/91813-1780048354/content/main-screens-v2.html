@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Landlord Reviews — Screen Designs</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #0f172a;
+    color: #f8fafc;
+    padding: 32px 24px;
+    min-height: 100vh;
+  }
+  h1 { font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 6px; }
+  .sub { text-align: center; color: #94a3b8; font-size: 14px; margin-bottom: 36px; }
+
+  .screens { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; }
+
+  .phone-wrap {
+    display: flex; flex-direction: column; align-items: center; cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .phone-wrap:hover { transform: translateY(-4px); }
+  .phone-wrap.selected .phone { box-shadow: 0 0 0 3px #6366f1, 0 24px 48px rgba(99,102,241,0.4); }
+  .screen-label {
+    margin-top: 14px; font-size: 15px; font-weight: 600; color: #f1f5f9;
+  }
+  .screen-desc { margin-top: 4px; font-size: 12px; color: #64748b; text-align: center; max-width: 200px; }
+  .selected-badge {
+    display: none; margin-top: 8px; background: #6366f1; color: white;
+    font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px;
+  }
+  .phone-wrap.selected .selected-badge { display: block; }
+
+  /* Phone frame */
+  .phone {
+    width: 220px;
+    background: #1e293b;
+    border-radius: 40px;
+    padding: 14px 10px;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.5), inset 0 0 0 1px #334155;
+    transition: box-shadow 0.2s;
+    position: relative;
+  }
+  .phone::before {
+    content: '';
+    display: block;
+    width: 60px; height: 6px;
+    background: #334155;
+    border-radius: 3px;
+    margin: 0 auto 12px;
+  }
+  .screen {
+    background: #f8fafc;
+    border-radius: 28px;
+    overflow: hidden;
+    color: #0f172a;
+    min-height: 420px;
+  }
+
+  /* ── Screen 1: Home ── */
+  .s1-header {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    padding: 16px 14px 20px;
+    color: white;
+  }
+  .s1-header .top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .s1-header .app-name { font-size: 15px; font-weight: 700; }
+  .s1-header .avatar { width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.3); display: flex; align-items: center; justify-content: center; font-size: 12px; }
+  .s1-search {
+    background: white; border-radius: 10px; padding: 8px 10px;
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; color: #94a3b8;
+  }
+  .s1-body { padding: 12px 12px; }
+  .s1-section-title { font-size: 10px; font-weight: 700; color: #94a3b8; letter-spacing: 0.06em; margin-bottom: 8px; }
+  .prop-card {
+    background: white; border-radius: 12px; padding: 10px 12px; margin-bottom: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    border: 1px solid #f1f5f9;
+  }
+  .prop-card .addr { font-size: 12px; font-weight: 600; color: #0f172a; margin-bottom: 2px; }
+  .prop-card .row2 { display: flex; align-items: center; justify-content: space-between; }
+  .prop-card .stars { color: #f59e0b; font-size: 11px; }
+  .prop-card .landlord { font-size: 10px; color: #6366f1; }
+  .prop-card .count { font-size: 10px; color: #94a3b8; }
+  .add-btn {
+    margin: 4px 0 0;
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white; border: none; border-radius: 10px;
+    padding: 9px; font-size: 12px; font-weight: 600;
+    width: 100%; text-align: center;
+  }
+
+  /* ── Screen 2: Property Detail ── */
+  .s2-hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    padding: 14px 14px 16px; color: white;
+  }
+  .s2-back { font-size: 10px; color: #64748b; margin-bottom: 6px; }
+  .s2-addr { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+  .s2-landlord { font-size: 10px; color: #818cf8; }
+  .s2-rating-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
+  .s2-big-num { font-size: 32px; font-weight: 800; color: #f8fafc; line-height: 1; }
+  .s2-stars-col .stars { color: #f59e0b; font-size: 14px; }
+  .s2-stars-col .count { font-size: 10px; color: #64748b; }
+  .s2-body { padding: 10px 12px; }
+  .sub-ratings { background: #f8fafc; border-radius: 10px; padding: 8px 10px; margin-bottom: 8px; }
+  .sub-row { display: flex; justify-content: space-between; font-size: 10px; color: #475569; margin-bottom: 3px; }
+  .sub-row .bar-wrap { display: flex; align-items: center; gap: 4px; }
+  .bar { height: 4px; border-radius: 2px; background: #e2e8f0; width: 60px; overflow: hidden; }
+  .bar-fill { height: 100%; background: #f59e0b; border-radius: 2px; }
+  .write-btn {
+    background: linear-gradient(135deg, #059669, #10b981);
+    color: white; border: none; border-radius: 10px;
+    padding: 9px; font-size: 12px; font-weight: 600;
+    width: 100%; text-align: center; margin-bottom: 8px;
+  }
+  .review-item { border-top: 1px solid #f1f5f9; padding: 8px 0; }
+  .review-item .r-top { display: flex; justify-content: space-between; font-size: 10px; }
+  .review-item .r-name { font-weight: 600; color: #1e293b; }
+  .review-item .r-stars { color: #f59e0b; }
+  .review-item .r-text { font-size: 10px; color: #475569; margin-top: 2px; line-height: 1.4; }
+
+  /* ── Screen 3: Add Review ── */
+  .s3-header {
+    background: linear-gradient(135deg, #0891b2 0%, #0ea5e9 100%);
+    padding: 14px 14px; color: white;
+  }
+  .s3-header .back { font-size: 10px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+  .s3-header .title { font-size: 15px; font-weight: 700; }
+  .s3-body { padding: 12px 12px; }
+  .field-label { font-size: 9px; font-weight: 700; color: #94a3b8; letter-spacing: 0.06em; margin-bottom: 4px; margin-top: 8px; }
+  .field-input {
+    width: 100%; background: #f8fafc; border: 1.5px solid #e2e8f0;
+    border-radius: 8px; padding: 7px 9px; font-size: 11px; color: #1e293b;
+  }
+  .place-chip {
+    background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px;
+    padding: 6px 8px; font-size: 10px; color: #1d4ed8;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .suggest-chip {
+    background: #fefce8; border: 1px solid #fde047; border-radius: 6px;
+    padding: 4px 8px; font-size: 10px; color: #854d0e; margin-top: 3px;
+  }
+  .star-row { display: flex; gap: 6px; margin: 6px 0; }
+  .star { font-size: 22px; color: #f59e0b; }
+  .star.off { color: #e2e8f0; }
+  .textarea-field {
+    width: 100%; background: #f8fafc; border: 1.5px solid #e2e8f0;
+    border-radius: 8px; padding: 7px 9px; font-size: 11px; color: #94a3b8;
+    height: 52px; resize: none;
+  }
+  .date-row { display: flex; gap: 6px; }
+  .date-row .field-input { flex: 1; }
+  .submit-btn {
+    background: linear-gradient(135deg, #4f46e5, #7c3aed);
+    color: white; border: none; border-radius: 10px;
+    padding: 9px; font-size: 12px; font-weight: 600;
+    width: 100%; text-align: center; margin-top: 10px;
+  }
+
+  .question { text-align: center; color: #94a3b8; font-size: 13px; margin-top: 28px; }
+  .question strong { color: #f1f5f9; }
+</style>
+<script>
+function toggleSelect(el) {
+  el.classList.toggle('selected');
+  const choice = el.dataset.choice;
+  const selected = !!el.classList.contains('selected');
+  if (window.recordEvent) window.recordEvent({ type: 'click', choice, selected });
+}
+</script>
+</head>
+<body>
+<h1>Landlord Reviews — App Screens</h1>
+<p class="sub">Three core screens. Click to select / deselect. Share feedback in terminal.</p>
+
+<div class="screens">
+
+  <!-- Screen 1: Home -->
+  <div class="phone-wrap" data-choice="home" onclick="toggleSelect(this)">
+    <div class="phone">
+      <div class="screen">
+        <div class="s1-header">
+          <div class="top-row">
+            <div class="app-name">🏠 RentRate</div>
+            <div class="avatar">SS</div>
+          </div>
+          <div class="s1-search">🔍 Search address or neighbourhood…</div>
+        </div>
+        <div class="s1-body">
+          <div class="s1-section-title">TRENDING IN YOUR AREA</div>
+          <div class="prop-card">
+            <div class="addr">42 Maple St, Austin TX</div>
+            <div class="row2">
+              <span class="stars">★★★★☆ <span style="color:#94a3b8">14 reviews</span></span>
+              <span class="landlord">J. Davidson</span>
+            </div>
+          </div>
+          <div class="prop-card">
+            <div class="addr">890 Oak Ave, Austin TX</div>
+            <div class="row2">
+              <span class="stars">★★★☆☆ <span style="color:#94a3b8">6 reviews</span></span>
+              <span class="landlord" style="color:#94a3b8">Unknown</span>
+            </div>
+          </div>
+          <div class="prop-card">
+            <div class="addr">12 River Rd, Austin TX</div>
+            <div class="row2">
+              <span class="stars">★★★★★ <span style="color:#94a3b8">22 reviews</span></span>
+              <span class="landlord">M. Patel</span>
+            </div>
+          </div>
+          <div class="add-btn">+ Add a Property &amp; Review</div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label">Home / Search</div>
+    <div class="screen-desc">Search bar + nearby properties feed</div>
+    <div class="selected-badge">✓ Selected</div>
+  </div>
+
+  <!-- Screen 2: Property Detail -->
+  <div class="phone-wrap" data-choice="detail" onclick="toggleSelect(this)">
+    <div class="phone">
+      <div class="screen">
+        <div class="s2-hero">
+          <div class="s2-back">← Back to search</div>
+          <div class="s2-addr">42 Maple St, Austin TX 78701</div>
+          <div class="s2-landlord">Landlord: John Davidson</div>
+          <div class="s2-rating-row">
+            <div class="s2-big-num">4.2</div>
+            <div class="s2-stars-col">
+              <div class="stars">★★★★☆</div>
+              <div class="count">14 reviews</div>
+            </div>
+          </div>
+        </div>
+        <div class="s2-body">
+          <div class="sub-ratings">
+            <div class="sub-row">
+              <span>Responsiveness</span>
+              <div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:80%"></div></div><span style="font-size:10px;color:#475569">4.0</span></div>
+            </div>
+            <div class="sub-row">
+              <span>Maintenance</span>
+              <div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:70%"></div></div><span style="font-size:10px;color:#475569">3.5</span></div>
+            </div>
+            <div class="sub-row">
+              <span>Value for money</span>
+              <div class="bar-wrap"><div class="bar"><div class="bar-fill" style="width:90%"></div></div><span style="font-size:10px;color:#475569">4.5</span></div>
+            </div>
+          </div>
+          <div class="write-btn">✍ Write a Review</div>
+          <div class="review-item">
+            <div class="r-top"><span class="r-name">Anonymous</span><span class="r-stars">★★★★☆</span></div>
+            <div class="r-text">"Great landlord, very responsive to issues."</div>
+          </div>
+          <div class="review-item">
+            <div class="r-top"><span class="r-name">Anonymous</span><span class="r-stars">★★★☆☆</span></div>
+            <div class="r-text">"Decent but slow on repair requests."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label">Property Detail</div>
+    <div class="screen-desc">Ratings, sub-scores, review feed</div>
+    <div class="selected-badge">✓ Selected</div>
+  </div>
+
+  <!-- Screen 3: Add Review -->
+  <div class="phone-wrap" data-choice="addreview" onclick="toggleSelect(this)">
+    <div class="phone">
+      <div class="screen">
+        <div class="s3-header">
+          <div class="back">← Cancel</div>
+          <div class="title">Add Review</div>
+        </div>
+        <div class="s3-body">
+          <div class="field-label">PROPERTY ADDRESS</div>
+          <div class="place-chip">📍 42 Maple St, Austin TX 78701</div>
+
+          <div class="field-label">LANDLORD NAME (OPTIONAL)</div>
+          <input class="field-input" value="John Dav" readonly>
+          <div class="suggest-chip">💡 Did you mean <strong>John Davidson</strong>? (12 properties)</div>
+
+          <div class="field-label">OVERALL RATING</div>
+          <div class="star-row">
+            <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star off">★</span>
+          </div>
+
+          <div class="field-label">YOUR EXPERIENCE</div>
+          <textarea class="textarea-field" readonly>Responsive landlord, fixed the heater within 24h...</textarea>
+
+          <div class="field-label">TENANCY PERIOD</div>
+          <div class="date-row">
+            <input class="field-input" value="Jan 2023" readonly>
+            <input class="field-input" value="Dec 2024" readonly>
+          </div>
+          <div class="submit-btn">Submit Review</div>
+        </div>
+      </div>
+    </div>
+    <div class="screen-label">Write Review</div>
+    <div class="screen-desc">Address → landlord suggest → stars → text</div>
+    <div class="selected-badge">✓ Selected</div>
+  </div>
+
+</div>
+
+<p class="question">Do these screens capture the right flow? <strong>Any screen feel wrong or missing?</strong><br>Reply in the terminal with feedback.</p>
+
+</body>
+</html>

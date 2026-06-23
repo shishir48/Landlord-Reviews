@@ -1,8 +1,8 @@
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 type Props = {
-  value: number;         // 0–5, supports decimals for display
-  onPress?: (n: number) => void;  // undefined = display-only
+  value: number;
+  onPress?: (n: number) => void;
   size?: number;
 };
 
@@ -14,8 +14,7 @@ export function StarRating({ value, onPress, size = 20 }: Props) {
           key={n}
           onPress={() => onPress?.(n)}
           disabled={!onPress}
-          activeOpacity={0.7}
-        >
+          activeOpacity={0.7}>
           <Text style={[styles.star, { fontSize: size, color: n <= value ? '#f59e0b' : '#e2e8f0' }]}>
             ★
           </Text>
@@ -27,5 +26,5 @@ export function StarRating({ value, onPress, size = 20 }: Props) {
 
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', gap: 2 },
-  star: { lineHeight: undefined },
+  star: { lineHeight: undefined as any },
 });

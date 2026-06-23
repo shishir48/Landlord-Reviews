@@ -42,6 +42,43 @@ router.post('/', async (req, res) => {
   }
 });
 
+// Feed — recent properties with ratings, newest first
+router.get('/feed', async (_req, res) => {
+  try {
+    const properties = await Property.find()
+      .populate('landlord_id')
+      .sort({ createdAt: -1 })
+      .limit(20);
+    res.json({ properties });
+  } catch (err) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Link a landlord to a property
+router.patch('/:id', async (req, res) => {
+  try {
+    const { landlord_id } = req.body;
+    const update = {};
+    if (landlord_id !== undefined) update.landlord_id = landlord_id;
+
+    if (Object.keys(update).length === 0) {
+      return res.status(400).json({ error: 'No fields to update' });
+    }
+
+    const property = await Property.findByIdAndUpdate(
+      req.params.id,
+      { $set: update },
+      { new: true }
+    ).populate('landlord_id');
+
+    if (!property) return res.status(404).json({ error: 'Not found' });
+    res.json({ property });
+  } catch (err) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 router.get('/', async (req, res) => {
   try {
     const { place_id, _id } = req.query;

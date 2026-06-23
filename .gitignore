@@ -1,0 +1,15 @@
+
+# Web
+web/dist/
+web/node_modules/
+
+# Mobile
+mobile/android/.gradle/
+mobile/android/app/build/
+mobile/android/build/
+mobile/node_modules/
+mobile/.metro-health-check*
+
+# Misc
+*.log
+.DS_Store

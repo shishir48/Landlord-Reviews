@@ -1,5 +1,5 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { router } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 import { StarRating } from './StarRating';
 import { Colors } from '../constants/Colors';
 
@@ -12,12 +12,13 @@ type Property = {
 };
 
 export function PropertyCard({ property }: { property: Property }) {
+  const navigation = useNavigation<any>();
+
   return (
     <TouchableOpacity
       style={styles.card}
-      onPress={() => router.push(`/property/${property._id}`)}
-      activeOpacity={0.8}
-    >
+      onPress={() => navigation.navigate('PropertyDetail', { id: property._id })}
+      activeOpacity={0.8}>
       <Text style={styles.address} numberOfLines={1}>{property.formatted_address}</Text>
       <View style={styles.row}>
         <StarRating value={property.avg_rating} size={14} />
